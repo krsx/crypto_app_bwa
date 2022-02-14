@@ -12,6 +12,14 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
+  }
+}
+
 class _MyAppState extends State<MyApp> {
   int currentIndex = 0;
 
@@ -23,181 +31,184 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         body: SafeArea(
           child: Container(
-            child: ListView(
-              children: [
-                Column(
-                  children: [
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Hello, Shadam",
-                                style: titleTextStyle.copyWith(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "Your portofolio looks great today",
-                                style: subtitleTextStyle.copyWith(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Image.asset(
-                            "assets/images/Profile.png",
-                            width: 36,
-                          ),
-                        ],
+            child: ScrollConfiguration(
+              behavior: MyBehavior(),
+              child: ListView(
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 24,
                       ),
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Container(
-                        width: 327,
-                        child: Image.asset("assets/images/Card.png"),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Hello, Shadam",
+                                  style: titleTextStyle.copyWith(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  "Your portofolio looks great today",
+                                  style: subtitleTextStyle.copyWith(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Spacer(),
+                            Image.asset(
+                              "assets/images/Profile.png",
+                              width: 36,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Column(
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Container(
+                          width: 327,
+                          child: Image.asset("assets/images/Card.png"),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 24,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "My Assets",
+                                  style: titleTextStyle.copyWith(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Spacer(),
+                                Text(
+                                  "View all",
+                                  style: lightTextStyle.copyWith(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 24,
+                            ),
+                            AssetCard(
+                              name: "Ethereum",
+                              money: 60000005,
+                              logo: "assets/images/Ethereum Logo.png",
+                            ),
+                            SizedBox(
+                              height: 14,
+                            ),
+                            AssetCard(
+                              name: "Bitcoin",
+                              money: 30000002,
+                              logo: "assets/images/bitcoin 1.png",
+                            ),
+                            SizedBox(
+                              height: 14,
+                            ),
+                            AssetCard(
+                              name: "Cardano",
+                              money: 20000003,
+                              logo: "assets/images/Cardano Logo.png",
+                            ),
+                            SizedBox(
+                              height: 24,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "My Assets",
-                                style: titleTextStyle.copyWith(
-                                  fontSize: 16,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Recommended to Buy",
+                                  style: titleTextStyle.copyWith(
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              ),
-                              Spacer(),
-                              Text(
-                                "View all",
-                                style: lightTextStyle.copyWith(
-                                  fontSize: 12,
+                                Spacer(),
+                                Text(
+                                  "View all",
+                                  style: lightTextStyle.copyWith(
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Container(
+                            height: 156,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                SizedBox(
+                                  width: 24,
+                                ),
+                                RecomBox(
+                                  name: "Tron",
+                                  money: 15,
+                                  percentage: 5.09,
+                                  imageUrl: "assets/images/Tron Logo.png",
+                                ),
+                                SizedBox(
+                                  width: 14,
+                                ),
+                                RecomBox(
+                                    name: "Stellar",
+                                    money: 9.09,
+                                    percentage: 2.01,
+                                    imageUrl: "assets/images/Stellar Logo.png"),
+                                SizedBox(
+                                  width: 14,
+                                ),
+                                RecomBox(
+                                    name: "Xrp Ripple",
+                                    money: 8.50,
+                                    percentage: 4.09,
+                                    imageUrl: "assets/images/Ripple Logo.png"),
+                                SizedBox(
+                                  width: 24,
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: 24,
                           ),
-                          AssetCard(
-                            name: "Ethereum",
-                            money: 60000005,
-                            logo: "assets/images/Ethereum Logo.png",
-                          ),
-                          SizedBox(
-                            height: 14,
-                          ),
-                          AssetCard(
-                            name: "Bitcoin",
-                            money: 30000002,
-                            logo: "assets/images/bitcoin 1.png",
-                          ),
-                          SizedBox(
-                            height: 14,
-                          ),
-                          AssetCard(
-                            name: "Cardano",
-                            money: 20000003,
-                            logo: "assets/images/Cardano Logo.png",
-                          ),
-                          SizedBox(
-                            height: 24,
-                          ),
                         ],
-                      ),
-                    ),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Recommended to Buy",
-                                style: titleTextStyle.copyWith(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Spacer(),
-                              Text(
-                                "View all",
-                                style: lightTextStyle.copyWith(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        Container(
-                          height: 156,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              SizedBox(
-                                width: 24,
-                              ),
-                              RecomBox(
-                                name: "Tron",
-                                money: 15,
-                                percentage: 5.09,
-                                imageUrl: "assets/images/Tron Logo.png",
-                              ),
-                              SizedBox(
-                                width: 14,
-                              ),
-                              RecomBox(
-                                  name: "Stellar",
-                                  money: 9.09,
-                                  percentage: 2.01,
-                                  imageUrl: "assets/images/Stellar Logo.png"),
-                              SizedBox(
-                                width: 14,
-                              ),
-                              RecomBox(
-                                  name: "Xrp Ripple",
-                                  money: 8.50,
-                                  percentage: 4.09,
-                                  imageUrl: "assets/images/Ripple Logo.png"),
-                              SizedBox(
-                                width: 24,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 24,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
